@@ -167,10 +167,12 @@ func (ss *SQLServer) Open(url string) (database.Driver, error) {
 	}
 
 	migrationsTable := purl.Query().Get("x-migrations-table")
+	schemaName := purl.Query().Get("schema")
 
 	px, err := WithInstance(db, &Config{
 		DatabaseName:    purl.Path,
 		MigrationsTable: migrationsTable,
+		SchemaName: schemaName,
 	})
 
 	if err != nil {
